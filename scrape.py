@@ -56,6 +56,12 @@ def separate_listings(sentence_list):
         if re.search('USD \$\d*\.\d* USD', sentence):
             sale_price = re.sub('USD \$\d*\.\d* USD \$', '', sentence)
             item_prices[index] = sale_price
+
+    for index, sentence in enumerate(item_names):
+        if re.search(',', sentence):
+            item_name = re.sub(',', '', sentence)
+            item_names[index] = item_name
+
     return item_names, item_prices
 
 def write_to_csv(item_names, item_prices):
@@ -65,7 +71,7 @@ def write_to_csv(item_names, item_prices):
     :param item_prices: list of sale item prices
     """
     with open('dst_prices.csv', 'w', newline='', encoding='utf-8') as csv_file:
-        csv_writer = csv.writer(csv_file)
+        csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_NONE, delimiter=',', quotechar='',escapechar=' ')
         csv_writer.writerow(['Name', 'Price'])
         for index, item_name in enumerate(item_names):
             csv_writer.writerow([item_name, item_prices[index]])
