@@ -40,7 +40,7 @@ def process_sentences(lists):
 
 def separate_listings(sentence_list):
     """
-    Function to separate raw sentences into a list of names and prices
+    Function to separate raw sentences into a list of names and prices and further processes each
     :param sentence_list: raw sentence list of item names and prices
     :return: list, list
     """ 
